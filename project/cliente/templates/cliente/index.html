@@ -12,3 +12,26 @@
         
     </ul>
 {% endblock contenido %}
+
+
+<!-- templates/cliente/buscar_cliente.html -->
+
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h1>Buscar Cliente</h1>
+  <form method="post" action="{% url 'cliente:buscar_cliente' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Buscar</button>
+  </form>
+
+  {% if resultados %}
+    <h2>Resultados:</h2>
+    <ul>
+      {% for cliente in resultados %}
+        <li>{{ cliente.nombre }} {{ cliente.apellido }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
